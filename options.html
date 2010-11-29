@@ -1,0 +1,50 @@
+<html>
+<head><title>Email Options</title></head>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var email_address = document.getElementById("email_address").value;
+  localStorage["email_address"] = document.getElementById("email_address").value;
+
+  var from_address = document.getElementById("from_address").value;
+  localStorage["from_address"] = from_address;
+
+  var key_string = document.getElementById("key_string").value;
+  localStorage["key_string"] = key_string;
+
+  // Update status to let user know options were saved - briefly :)
+
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved: <br>To Email: " + email_address + "<br>From Email: " + from_address;
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 750);
+}
+
+// autofills form fields with previous entered information if it exists
+function restore_options() {
+    //first check to see if there are already email addresses stored, exit if not (will display defaults then)
+  if(!localStorage["email_address"] && !localStorage["from_address"]){
+    return;
+  }
+  document.getElementById("email_address").value = localStorage["email_address"];
+  document.getElementById("from_address").value = localStorage["from_address"];
+  document.getElementById("key_string").value = localStorage["key_string"];
+}
+
+</script>
+
+<body onload="restore_options()">
+
+Enter in your favorite persons email address, your own, and the magic key ;)
+TO: <input id="email_address" value="jesselondon@gmail.com" name="email_address" /><br />
+From: <input id="from_address" value="jennifer.stander@gmail.com" name="from_address" /><br />
+Key: <input id="key_string" value="input key here" name="key_string" />
+
+<br>
+<button onclick="save_options()">Save</button>
+<br>
+<div id="status"></div>
+</body>
+</html>

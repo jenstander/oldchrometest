@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Email Confirmation</title>
+<script>
+
+window.onload = function() 
+{ 
+	// grab the selected tab title and url and send to my email function
+	chrome.tabs.getSelected(null, function(tab){ 
+		send_email(tab.title, tab.url);
+	});
+}
+
+// uses my own dumb webservice, returns true or false
+ function send_email(title, url){
+    var jens_url = "https://someurlgoeshereblahblahblah.com";
+    var xhr = new XMLHttpRequest();
+    var fullstring = "";
+
+    // need to encode the following still on this end
+    // would like to alter this to use gmail if it's open 
+    // until then it's just for jesse and I, I guess
+
+    var emailaddress = localStorage["email_address"];
+    var fromaddress = localStorage["from_address"];
+    var key_string = localStorage["key_string"];
+    
+    var fullstring= jens_url + "?id=" + key_string + "&email_address=" + emailaddress + "&page_title=" + title + "&page_link=" + url + "&from_address=" + fromaddress;
+    console.log(fullstring);
+
+    //send and receive
+    xhr.open("GET", fullstring, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        // WARNING! Might be injecting a malicious script!  This should not be complete yet
+        console.log(xhr.responseText);
+      }
+    }
+    xhr.send();
+    return xhr.responseText;
+  } // end function executeMailto
+</script>
+
+<style>
+body {
+  min-width:357px;
+  overflow-x:hidden;
+}
+
+img {
+  margin:5px;
+  border:2px solid black;
+  vertical-align:middle;
+  width:75px;
+  height:75px;
+}
+</style>
+
+</head>
+<body>
+In theory your email was sent!
+<div id="response"></div>
+<p><a href="#" onclick="window.close()">Close!!</a></p>
+</body>
+</html>
