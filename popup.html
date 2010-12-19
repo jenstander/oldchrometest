@@ -13,7 +13,7 @@ window.onload = function()
 
 // uses my own dumb webservice, returns true or false
  function send_email(title, url){
-    var jens_url = "https://someurlgoeshereblahblahblah.com";
+    var jens_url = "http://domainnamefromemailwebservice.com";
     var xhr = new XMLHttpRequest();
     var fullstring = "";
 
@@ -38,7 +38,7 @@ window.onload = function()
     }
     xhr.send();
     return xhr.responseText;
-  } // end function executeMailto
+  } // end function send_email 
 </script>
 
 <style>

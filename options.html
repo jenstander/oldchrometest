@@ -23,7 +23,7 @@ function save_options() {
 }
 
 // autofills form fields with previous entered information if it exists
-function restore_options() {
+window.onload = function() {
     //first check to see if there are already email addresses stored, exit if not (will display defaults then)
   if(!localStorage["email_address"] && !localStorage["from_address"]){
     return;
@@ -35,7 +35,7 @@ function restore_options() {
 
 </script>
 
-<body onload="restore_options()">
+<body>
 
 Enter in your favorite persons email address, your own, and the magic key ;)
 TO: <input id="email_address" value="jesselondon@gmail.com" name="email_address" /><br />
